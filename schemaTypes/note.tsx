@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import customer from "./customer";
 
 const workspaceName = window.location.pathname.split('/')[1];
 
@@ -40,9 +41,15 @@ export default defineType({
             options: {
                 dateFormat: "YYYY-MM-DD",
             },
-            initialValue: () => new Date().toISOString().split('T')[0],
         },
     ],
+    initialValue: (params, value) => {
+        console.log(params, value);
+        return {
+            date: new Date().toISOString().split('T')[0],
+            customer: params.customerId,
+        }
+    },
     preview: {
         select: {
             title: "title",
